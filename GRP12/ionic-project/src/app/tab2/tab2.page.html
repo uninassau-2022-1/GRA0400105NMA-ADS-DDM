@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Urna Eletrônica
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <h3 class="text-center">RESULTADO PARCIAL</h3>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-label> {{count}} pessoa(s) votaram! </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Candidato 70: </ion-label>
+        <ion-badge color="dark" slot="end">{{candidate1}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label> Candidato 15:</ion-label>
+        <ion-badge color="dark" slot="end">{{candidate2}}</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Candidato 85:</ion-label>
+        <ion-badge color="dark" slot="end">{{candidate3}}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card name="ion-card">
+    <ion-input class="input-margin" placeholder='Digite o número do candidato' type="tel" maxlength="2" [(ngModel)]="searchCandidates" animated required>
+    </ion-input>
+    <ion-button color="success" class="button" (click)="calculateVotes()">
+       CONFIRMA
+    </ion-button>
+  </ion-card>
+
+  <div class="buttons-margin">
+  </div>
+
+  <ion-row>
+    <ion-col col-6>
+      <ion-card *ngFor="let candidate of candidates | filter:searchCandidates">
+        <ion-card-header>
+          <ion-button (click)="setCandidateNumber(candidate.number)" color="success">{{candidate.number}}</ion-button>
+          <ion-card-title>{{candidate.name}}</ion-card-title>
+          <ion-popover [isOpen]="candidate.number === popoverCadidateOpen" size="auto">
+            <ng-template>
+              <ion-list>
+                <ion-list-header>{{candidate.name}}</ion-list-header>
+                <ion-item button>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Magni cum culpa consequuntur!    </ion-item>
+              </ion-list>
+            </ng-template>
+          </ion-popover>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
